@@ -1,3 +1,13 @@
 deploy/
 .git
 *.md
+**/node_modules
+**/.next
+**/.git
+**/*.log
+**/*.tsbuildinfo
+**/.env*
+next-app/*.py
+next-app/*.ps1
+next-app/*.txt
+next-app/*.cmd

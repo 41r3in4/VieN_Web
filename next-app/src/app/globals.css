@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Lora", "Merriweather", "Noto Serif", "KaiTi", "STKaiti", "SimSun", Georgia, serif;
+}
+
+@layer base {
+  :root {
+    --bg-warm-ivory: #FAF7F2;
+    --primary-terracotta: #C83C23;
+    --gold-heritage: #D4AF37;
+    --charcoal-dark: #1A1615;
+    --green-jade: #1E4D3B;
+    --parchment: #F4EEDF;
+    --border-warm: #E6DCBA;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #1A1615;
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overscroll-behavior-y: none;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(200, 60, 35, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 60, 35, 0.5);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(250, 247, 242, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.glass-dark {
+  background: rgba(26, 22, 21, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Traditional Vietnamese Paper Texture */
+.parchment-texture {
+  background-color: #FAF7F2;
+  background-image: radial-gradient(#E8DFC8 0.75px, transparent 0.75px), radial-gradient(#E8DFC8 0.75px, #FAF7F2 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Shimmer animation for badges and highlights */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.5) 50%, rgba(212, 175, 55, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 3s infinite;
+}
+
+/* Fog of War clouds */
+@keyframes fogDrift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.75; }
+  50% { transform: translate(-3%, 2%) scale(1.05); opacity: 0.9; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.75; }
+}
+
+.fog-cloud {
+  animation: fogDrift 14s ease-in-out infinite alternate;
+}
+
+/* Keep the interactive app in the same warm, dark palette as the landing page. */
+.experience-shell {
+  --experience-bg: #1E1410;
+  --experience-surface: #2B1D17;
+  --experience-subtle: #3D2A20;
+  --experience-line: #4B372B;
+  --experience-fg: #FBF8F3;
+  --experience-muted: #B5A395;
+  --font-serif: var(--font-sans);
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  min-height: 100vh;
+  background: var(--experience-bg);
+  color: var(--experience-fg);
+  color-scheme: dark;
+}
+
+.experience-shell .parchment-texture {
+  background-color: var(--experience-bg);
+  background-image:
+    radial-gradient(rgba(227, 168, 58, 0.08) 0.75px, transparent 0.75px),
+    radial-gradient(rgba(227, 168, 58, 0.08) 0.75px, var(--experience-bg) 0.75px);
+}
+
+.experience-shell [class~="bg-[#FAF7F2]"],
+.experience-shell [class~="bg-[#FAF7F2]/90"],
+.experience-shell [class~="bg-[#FAF7F2]/95"],
+.experience-shell [class~="bg-white"],
+.experience-shell [class~="bg-white/70"],
+.experience-shell [class~="bg-white/80"],
+.experience-shell [class~="bg-white/90"],
+.experience-shell [class~="bg-white/95"] {
+  background-color: var(--experience-surface);
+}
+
+.experience-shell [class~="bg-stone-50"],
+.experience-shell [class~="bg-stone-50/70"],
+.experience-shell [class~="bg-stone-100"],
+.experience-shell [class~="bg-stone-200"],
+.experience-shell [class~="bg-stone-300"] {
+  background-color: var(--experience-subtle);
+}
+
+.experience-shell [class~="bg-stone-900"] {
+  background-color: var(--experience-bg);
+}
+
+.experience-shell [class~="bg-stone-800"] {
+  background-color: var(--experience-surface);
+}
+
+.experience-shell [class~="bg-stone-700"] {
+  background-color: var(--experience-subtle);
+}
+
+.experience-shell [class~="bg-amber-50"],
+.experience-shell [class~="bg-amber-50/40"],
+.experience-shell [class~="bg-amber-100"] {
+  background-color: #3B2B18;
+}
+
+.experience-shell [class~="bg-emerald-50"],
+.experience-shell [class~="bg-emerald-50/50"],
+.experience-shell [class~="bg-emerald-50/70"],
+.experience-shell [class~="bg-emerald-100"],
+.experience-shell [class~="bg-emerald-200"] {
+  background-color: #21382B;
+}
+
+.experience-shell [class*="from-stone-50"][class*="to-amber-50/40"] {
+  background-image: linear-gradient(to right, var(--experience-surface), var(--experience-subtle));
+}
+
+.experience-shell [class*="from-stone-300"][class*="to-stone-200"] {
+  background-image: linear-gradient(to top, #5B5047, var(--experience-subtle));
+}
+
+.experience-shell [class~="bg-[#1A1615]"] {
+  background-color: var(--experience-bg);
+}
+
+.experience-shell [class~="bg-[#C83C23]"] {
+  background-color: #CC4B34;
+}
+
+.experience-shell [class~="bg-[#a62f1a]"] {
+  background-color: #B23C28;
+}
+
+.experience-shell [class~="text-[#1A1615]"],
+.experience-shell [class~="text-stone-900"],
+.experience-shell [class~="text-stone-800"],
+.experience-shell [class~="text-stone-700"] {
+  color: var(--experience-fg);
+}
+
+.experience-shell [class~="text-stone-600"],
+.experience-shell [class~="text-stone-500"],
+.experience-shell [class~="text-stone-400"],
+.experience-shell [class~="text-stone-300"] {
+  color: var(--experience-muted);
+}
+
+.experience-shell [class~="text-[#C83C23]"] {
+  color: #E8826C;
+}
+
+.experience-shell [class~="text-[#8C532B]"],
+.experience-shell [class~="text-amber-900"],
+.experience-shell [class~="text-amber-950"] {
+  color: #E3A83A;
+}
+
+.experience-shell [class~="text-emerald-800"],
+.experience-shell [class~="text-emerald-700"],
+.experience-shell [class~="text-emerald-900"] {
+  color: #8FD0A9;
+}
+
+.experience-shell [class*="bg-gradient-to-t"][class*="from-[#D4AF37]"][class~="text-amber-950"] {
+  color: #271B13;
+}
+
+.experience-shell [class~="border-[#E8DFC8]"],
+.experience-shell [class~="border-stone-100"],
+.experience-shell [class~="border-stone-200"],
+.experience-shell [class~="border-stone-300"] {
+  border-color: var(--experience-line);
+}
+
+.experience-shell [class*="bg-gradient-to-b"][class*="from-amber-50"][class*="to-white"] {
+  background-image: none;
+  background-color: var(--experience-surface);
+}
