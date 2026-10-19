@@ -1,9 +1,10 @@
+import { hasValidOrigin } from '@/lib/request-origin';
 import { auth, authPool } from '@/lib/auth';
 
 export async function POST(request: Request) {
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session) return Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
-  if (request.headers.get('origin') !== new URL(request.url).origin) return Response.json({ error: 'INVALID_ORIGIN' }, { status: 403 });
+  if (!hasValidOrigin(request)) return Response.json({ error: 'INVALID_ORIGIN' }, { status: 403 });
   try {
     const text = await request.text();
     if (text.length > 300000) return Response.json({ error: 'IMAGE_TOO_LARGE' }, { status: 413 });
