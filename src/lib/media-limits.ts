@@ -1,0 +1,2 @@
+export const MAX_VIDEO_SIZE_MB = 200;
+export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024;

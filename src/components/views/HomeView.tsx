@@ -53,15 +53,15 @@ export const HomeView: React.FC = () => {
         <div className="relative z-10 space-y-2">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider">
             <Sparkles className="w-3 h-3" />
-            <span>Nền Tảng Di Sản Tương Tác 4.0</span>
+            <span>KHÁM PHÁ VĂN HÓA VIỆT</span>
           </div>
 
           <h1 className="font-serif font-black text-xl sm:text-2xl text-[#FAF7F2] leading-tight">
-            Một nền tảng · Nhiều điểm đến · Mỗi nơi một câu chuyện.
+            Mỗi điểm đến,<br />một câu chuyện Việt.
           </h1>
 
           <p className="text-xs text-stone-300 italic leading-relaxed pt-1">
-            &ldquo;Công nghệ giúp con người trải nghiệm văn hóa, không thay thế văn hóa.&rdquo;
+            Lắng nghe chuyện xưa, khám phá dấu ấn văn hóa và ghi lại hành trình của riêng bạn.
           </p>
         </div>
       </div>

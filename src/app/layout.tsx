@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./generated.css";
+import "./polish.css";
 
 export const metadata: Metadata = {
   title: "VieN - Nền Tảng Du Lịch & Di Sản Văn Hóa Tương Tác",

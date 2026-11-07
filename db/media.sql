@@ -7,11 +7,15 @@ CREATE TABLE IF NOT EXISTS vien_media_assets (
   destination_id text NOT NULL,
   kind text NOT NULL CHECK (kind IN ('cover','video')),
   content_type text NOT NULL,
-  byte_size integer NOT NULL CHECK (byte_size > 0 AND byte_size <= 52428800),
+  byte_size integer NOT NULL CONSTRAINT vien_media_assets_byte_size_check CHECK (byte_size > 0 AND byte_size <= 209715200),
   status text NOT NULL DEFAULT 'uploading' CHECK (status IN ('uploading','ready')),
   created_by text NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+-- Upgrade the original 50 MB constraint on existing installations too.
+ALTER TABLE vien_media_assets DROP CONSTRAINT IF EXISTS vien_media_assets_byte_size_check;
+ALTER TABLE vien_media_assets ADD CONSTRAINT vien_media_assets_byte_size_check
+  CHECK (byte_size > 0 AND byte_size <= 209715200);
 CREATE TABLE IF NOT EXISTS vien_media_chunks (
   asset_id text NOT NULL REFERENCES vien_media_assets(id) ON DELETE CASCADE,
   chunk_index integer NOT NULL CHECK (chunk_index >= 0),

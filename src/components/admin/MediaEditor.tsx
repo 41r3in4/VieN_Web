@@ -5,6 +5,7 @@ import { useState,useEffect,useRef,type ChangeEvent } from 'react';
 import { X,ImagePlus,Video,Upload,LoaderCircle } from 'lucide-react';
 import { useMedia } from '@/context/MediaContext';
 import { useModalDialog } from '@/components/experience/useModalDialog';
+import { MAX_VIDEO_SIZE, MAX_VIDEO_SIZE_MB } from '@/lib/media-limits';
 
 async function coverImage(file: File): Promise<Blob> {
   if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 10*1024*1024) throw new Error('Chọn ảnh JPG, PNG hoặc WebP tối đa 10 MB.');
@@ -49,7 +50,7 @@ export function MediaEditor() {
     try {
       if (kind === 'cover') { const blob = await coverImage(file); setCover(blob); setCoverPreview(URL.createObjectURL(blob)); }
       else {
-        if (!['video/mp4','video/webm'].includes(file.type) || file.size > 50*1024*1024) throw new Error('Chọn video MP4 hoặc WebM tối đa 50 MB.');
+        if (!['video/mp4','video/webm'].includes(file.type) || file.size > MAX_VIDEO_SIZE) throw new Error(`Chọn video MP4 hoặc WebM tối đa ${MAX_VIDEO_SIZE_MB} MB.`);
         setVideo(file); setVideoPreview(URL.createObjectURL(file));
       }
     } catch (error) { setMessage(error instanceof Error ? error.message : 'Không thể đọc file.'); }
@@ -88,6 +89,6 @@ export function MediaEditor() {
   }
   return <div {...dialog} className="media-editor-backdrop"><section className="media-editor-panel"><header><div><span className="auth-eyebrow">QUẢN TRỊ NỘI DUNG</span><h2>{destination.name}</h2></div><button onClick={closeMediaEditor} data-dialog-close type="button" aria-label="Đóng quản lý media"><X size={20} /></button></header><p className="media-editor-intro">Ảnh bìa và video được dùng chung cho banner, thẻ điểm đến và phần trailer. Thành viên chỉ có quyền xem.</p><fieldset disabled={!!pending || preparing} className="media-editor-fields">
     <section><h3><ImagePlus size={18} /> Ảnh bìa</h3><img src={coverPreview || destination.coverImage} alt="Xem trước ảnh bìa" /><label className="media-file-label">Chọn ảnh mới<input type="file" accept="image/jpeg,image/png,image/webp" onChange={event => void choose(event,'cover')} /></label><p>JPG, PNG, WebP · tối đa 10 MB · cắt giữa theo tỷ lệ 16:9.</p><button type="button" className="intro-primary" disabled={!cover || !!pending || preparing} onClick={() => void upload('cover')}><Upload size={16} /> Tải ảnh lên & áp dụng</button></section>
-    <section><h3><Video size={18} /> Video trailer</h3>{videoPreview || current?.videoUrl ? <video src={videoPreview || current?.videoUrl} controls preload="metadata" /> : <div className="media-video-empty">Chưa có video do admin tải lên.</div>}<label className="media-file-label">Chọn video mới<input type="file" accept="video/mp4,video/webm" onChange={event => void choose(event,'video')} /></label><p>MP4, WebM · tối đa 50 MB/video.</p><button type="button" className="intro-primary" disabled={!video || !!pending || preparing} onClick={() => void upload('video')}><Upload size={16} /> Tải video lên & áp dụng</button></section>
+    <section><h3><Video size={18} /> Video trailer</h3>{videoPreview || current?.videoUrl ? <video src={videoPreview || current?.videoUrl} controls preload="metadata" /> : <div className="media-video-empty">Chưa có video do admin tải lên.</div>}<label className="media-file-label">Chọn video mới<input type="file" accept="video/mp4,video/webm" onChange={event => void choose(event,'video')} /></label><p>MP4, WebM · tối đa {MAX_VIDEO_SIZE_MB} MB/video.</p><button type="button" className="intro-primary" disabled={!video || !!pending || preparing} onClick={() => void upload('video')}><Upload size={16} /> Tải video lên & áp dụng</button></section>
   </fieldset>{preparing && <p role="status">Đang xử lý ảnh…</p>}{pending && <div className="media-upload-status" role="status"><LoaderCircle size={17} className="animate-spin" /><span>Đang tải {pending === 'cover' ? 'ảnh' : 'video'}… {percent}%</span><button onClick={() => controller.current?.abort()}>Hủy tải</button><progress value={percent} max={100} /></div>}{message && <p className="media-editor-message" role="status">{message}</p>}</section></div>;
 }

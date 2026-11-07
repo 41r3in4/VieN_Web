@@ -32,6 +32,7 @@ export default function IntroductionPage() {
             <div className="intro-art-caption"><span>VĂN HÓA ĐƯỢC GÌN GIỮ</span><span>CÂU CHUYỆN ĐƯỢC TIẾP NỐI</span></div>
           </div>
         </section>
+        <div className="intro-index" aria-label="Các lớp trải nghiệm"><span>KHÔNG GIAN KHÁM PHÁ DI SẢN</span><p>Câu chuyện văn hóa <i /> Hành trình tương tác <i /> Dấu ấn cá nhân</p><a href="#trai-nghiem">Khám phá VieN <ArrowRight size={16} /></a></div>
         <section className="intro-features" id="trai-nghiem">
           <div className="intro-section-heading"><span className="auth-eyebrow">KHÁM PHÁ THEO CÁCH CỦA BẠN</span><h2>Mỗi điểm dừng.<br />Một điều mới để hiểu.</h2><p>Công nghệ giúp con người trải nghiệm văn hóa, không thay thế văn hóa.</p></div>
           <div className="intro-feature-grid">

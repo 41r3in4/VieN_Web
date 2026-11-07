@@ -4,6 +4,7 @@ import { isAdmin } from '@/lib/admin';
 import { DESTINATIONS } from '@/data/destinations';
 import { MediaError } from '@/lib/media-error';
 import type { MediaCatalog } from '@/types/media';
+import { MAX_VIDEO_SIZE } from '@/lib/media-limits';
 
 export const MEDIA_CHUNK_SIZE = 1024 * 1024;
 export async function mediaCatalog(userId: string): Promise<MediaCatalog> {
@@ -21,7 +22,7 @@ export async function mediaJson(request: Request) {
 }
 export async function beginMediaUpload(userId: string, body: Record<string, unknown>) {
   const { destinationId, kind, contentType, size } = body;
-  if (!DESTINATIONS.some(d => d.id === destinationId) || !['cover','video'].includes(String(kind)) || !Number.isInteger(size) || typeof size !== 'number' || size <= 0 || size > (kind === 'cover' ? 2 * MEDIA_CHUNK_SIZE : 50 * MEDIA_CHUNK_SIZE)) throw new MediaError(400, 'INVALID_UPLOAD');
+  if (!DESTINATIONS.some(d => d.id === destinationId) || !['cover','video'].includes(String(kind)) || !Number.isInteger(size) || typeof size !== 'number' || size <= 0 || size > (kind === 'cover' ? 2 * MEDIA_CHUNK_SIZE : MAX_VIDEO_SIZE)) throw new MediaError(400, 'INVALID_UPLOAD');
   if (kind === 'cover' ? contentType !== 'image/webp' : !['video/mp4','video/webm'].includes(String(contentType))) throw new MediaError(400, 'INVALID_MEDIA_TYPE');
   // Replacing an unfinished upload only discards that admin's temporary chunks.
   await authPool.query("DELETE FROM vien_media_assets WHERE created_by=$1 AND destination_id=$2 AND kind=$3 AND status='uploading'", [userId, destinationId, kind]);
