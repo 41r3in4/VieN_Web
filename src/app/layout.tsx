@@ -3,6 +3,7 @@ import "./generated.css";
 import "./polish.css";
 
 export const metadata: Metadata = {
+  icons: { icon: [{ url: '/favicon.ico?v=vien-blue-1', sizes: 'any' }] },
   title: "VieN - Nền Tảng Du Lịch & Di Sản Văn Hóa Tương Tác",
   description: "Một nền tảng · Nhiều điểm đến · Mỗi nơi một câu chuyện. Công nghệ giúp con người trải nghiệm văn hóa, không thay thế văn hóa.",
   keywords: ["VieN", "di sản Việt Nam", "Đình làng Hải Châu", "Ngũ Hành Sơn", "Đà Nẵng", "văn bia", "Hán Nôm", "sắc phong"],

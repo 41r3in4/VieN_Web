@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 80 850 850">
+  <defs>
+    <linearGradient id="top" x1="113" y1="113" x2="641" y2="113" gradientUnits="userSpaceOnUse"><stop stop-color="#0870af"/><stop offset=".47" stop-color="#7395c7"/><stop offset="1" stop-color="#0568a5"/></linearGradient>
+    <linearGradient id="left" x1="250" y1="113" x2="250" y2="889" gradientUnits="userSpaceOnUse"><stop stop-color="#7391c3"/><stop offset=".35" stop-color="#e6e7f3"/><stop offset=".68" stop-color="#7b98c9"/><stop offset="1" stop-color="#0066a7"/></linearGradient>
+    <linearGradient id="diagonal" x1="113" y1="500" x2="905" y2="500" gradientUnits="userSpaceOnUse"><stop stop-color="#286fb1"/><stop offset=".42" stop-color="#8da5d1"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <linearGradient id="dot" x1="734" y1="200" x2="909" y2="200" gradientUnits="userSpaceOnUse"><stop stop-color="#0064a4"/><stop offset=".55" stop-color="#8c9dcb"/><stop offset="1" stop-color="#fcfbfd"/></linearGradient>
+  </defs>
+  <path fill="#fff" d="M80 80h850v850H80z"/>
+  <path fill="url(#top)" d="M113 113h528L113 641z"/>
+  <path fill="url(#left)" d="M113 113v776h589L538 722a184 184 0 1 1-164-327z"/>
+  <circle cx="428" cy="579" r="143" fill="#f45122"/>
+  <path fill="url(#diagonal)" d="M113 113h237l400 392V281q77 63 155 0v608z"/>
+  <circle cx="821.5" cy="204.5" r="87.5" fill="url(#dot)"/>
+</svg>
